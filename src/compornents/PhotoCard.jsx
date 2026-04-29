@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 
 const PhotoCard = ({ photo }) => {
-  console.log(photo);
+  // console.log(photo);
   return (
     <Card className="group border rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-pink-500/20">
       <div className="relative w-full aspect-square overflow-hidden">
