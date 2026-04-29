@@ -14,7 +14,6 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "All Photos", href: "/all-photos" },
-    { name: "Pricing", href: "/pricing" },
     { name: "Profile", href: "/profile" },
   ];
 
@@ -25,13 +24,10 @@ const Navbar = () => {
 const user = userData.data?.user;
 
 
-//  console.log(user)
-
 const userName = user?.name;
 const userEmail = user?.email;
 const userImage = user?.image;
 
-// console.log(userName)
 
 const handleSignOut = async() =>{
 await authClient.signOut();
