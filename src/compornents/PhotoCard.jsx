@@ -1,5 +1,6 @@
 import { Button, Card, Chip, Separator } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
@@ -53,12 +54,14 @@ const PhotoCard = ({ photo }) => {
       </div>
 
       <div className="px-3 pb-3">
-        <Button
-          variant="outline"
-          className="w-full transition-all duration-300 hover:scale-[1.03] hover:bg-linear-to-r hover:from-pink-500 hover:to-violet-600 hover:text-white"
-        >
-          View
-        </Button>
+        <Link href={`/all-photos/${photo.id}`}>
+          <Button
+            variant="outline"
+            className="w-full transition-all duration-300 hover:scale-[1.03] hover:bg-linear-to-r hover:from-pink-500 hover:to-violet-600 hover:text-white"
+          >
+            View
+          </Button>
+        </Link>
       </div>
     </Card>
   );
