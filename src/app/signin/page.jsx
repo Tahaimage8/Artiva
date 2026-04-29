@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { GrGoogle } from "react-icons/gr";
 import { toast } from "react-toastify";
 
 const SignInPage = () => {
@@ -24,10 +25,10 @@ const SignInPage = () => {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: '/'
+      callbackURL: "/",
     });
 
-    console.log({data,error})
+    console.log({ data, error });
     if (error) {
       toast.error("Signin failed! " + error.message);
       return;
@@ -39,8 +40,14 @@ const SignInPage = () => {
     }
   };
 
+
+  const handleGoogleSignIn = async() =>{
+await authClient.signIn.social({
+    provider:"google"
+})
+  }
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black px-4 py-12 text-white">
+    <div className="flex min-h-screen items-center justify-center bg-black px-4 py-12 text-white">
       <Card className="w-full max-w-md border border-white/10 bg-white/5 p-8 shadow-2xl shadow-pink-500/10 backdrop-blur-xl">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-black">
@@ -98,8 +105,24 @@ const SignInPage = () => {
             Sign Up
           </Link>
         </p>
+
+        <p className="mt-6 text-center text-sm text-gray-400">Or</p>
+
+        <div className="mt-6">
+          <Button
+          onClick={handleGoogleSignIn}
+            type="button"
+            className="group w-full flex items-center justify-center gap-3 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white backdrop-blur-xl shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.03] hover:border-pink-500/40 hover:bg-white/10 active:scale-[0.98]"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+              <GrGoogle className="text-black text-sm" />
+            </div>
+
+            <span className="tracking-wide">Continue with Google</span>
+          </Button>
+        </div>
       </Card>
-    </main>
+    </div>
   );
 };
 

@@ -14,6 +14,7 @@ import {
 } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { GrGoogle } from "react-icons/gr";
 
 import { toast } from "react-toastify";
 
@@ -55,8 +56,14 @@ if(data){
 
   };
 
+    const handleGoogleSignIn = async() =>{
+await authClient.signIn.social({
+    provider:"google"
+})
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black px-4 py-12 text-white">
+    <div className="flex min-h-screen items-center justify-center bg-black px-4 py-12 text-white">
       <Card className="w-full max-w-md border border-white/10 bg-white/5 p-8 shadow-2xl shadow-pink-500/10 backdrop-blur-xl">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -137,7 +144,7 @@ if(data){
           <div className="mt-2 flex gap-3">
             <Button
               type="submit"
-              className="flex-1 bg-gradient-to-r from-pink-500 to-violet-600 font-semibold text-white shadow-lg shadow-pink-500/20 transition hover:scale-[1.02]"
+              className="flex-1 bg-linear-to-r from-pink-500 to-violet-600 font-semibold text-white shadow-lg shadow-pink-500/20 transition hover:scale-[1.02]"
             >
               <Check />
               Sign Up
@@ -160,8 +167,26 @@ if(data){
             Sign In
           </Link>
         </p>
+
+
+        
+                <p className="mt-6 text-center text-sm text-gray-400">Or</p>
+        
+                <div className="mt-6">
+                  <Button
+                  onClick={handleGoogleSignIn}
+                    type="button"
+                    className="group w-full flex items-center justify-center gap-3 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white backdrop-blur-xl shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.03] hover:border-pink-500/40 hover:bg-white/10 active:scale-[0.98]"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+                      <GrGoogle className="text-black text-sm" />
+                    </div>
+        
+                    <span className="tracking-wide">Continue with Google</span>
+                  </Button>
+                </div>
       </Card>
-    </main>
+    </div>
   );
 };
 

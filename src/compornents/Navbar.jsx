@@ -4,7 +4,8 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -19,6 +20,27 @@ const Navbar = () => {
 
   const isActive = (href) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const userData = authClient.useSession()
+const user = userData.data?.user;
+
+
+//  console.log(user)
+
+const userName = user?.name;
+const userEmail = user?.email;
+const userImage = user?.image;
+
+// console.log(userName)
+
+const handleSignOut = async() =>{
+await authClient.signOut();
+}
+
+
+
+
+//  console.log(userData)
 
   return (
     <header className="relative sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-2xl shadow-lg shadow-black/20">
@@ -71,8 +93,10 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Desktop Buttons */}
-        <div className="hidden md:flex items-center gap-3">
+
+          {/* sign */}
+          {
+            !user &&         <div className="hidden md:flex items-center gap-3">
           <Link href="/signin">
             <Button
               variant="light"
@@ -88,8 +112,21 @@ const Navbar = () => {
             </Button>
           </Link>
         </div>
+          }
+          {
+            user && <div className="hidden md:flex gap-3 items-center">
+                <Avatar>
+        <Avatar.Image alt="John Doe" src={user?.image} 
+        referrerPolicy="no-referrer"
+        />
+        <Avatar.Fallback>{userName[0]}</Avatar.Fallback>
+      </Avatar>
 
-        {/* Mobile Button */}
+          <Button onClick={handleSignOut} size="sm" variant="danger">Signout</Button>
+            </div>
+          }
+
+
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl transition hover:bg-white/20"
@@ -114,10 +151,9 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div
-        className={`absolute left-0 right-0 top-full md:hidden overflow-hidden border-t border-white/10 bg-black/95 backdrop-blur-2xl transition-all duration-300 ${
-          open ? "max-h-[360px] opacity-100" : "max-h-0 opacity-0"
+        className={`absolute left-10 right-10 top-full md:hidden overflow-hidden border border-white/10 bg-violet-600/20 backdrop-blur-2xl transition-all duration-300 ${
+          open ? "max-h-90 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-4 py-4">
@@ -149,35 +185,37 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-
-          <div className="mt-4 flex gap-3">
-            <Link
-              href="/signin"
-              onClick={() => setOpen(false)}
-              className="w-full"
+              {/* sign */}
+          {
+            !user &&         <div className="flex items-center gap-3">
+          <Link href="/signin">
+            <Button
+              variant="light"
+              className="text-gray-200 hover:text-white transition"
             >
-              <Button
-                fullWidth
-                variant="bordered"
-                className="border-white/20 text-white"
-              >
-                Sign In
-              </Button>
-            </Link>
+              Sign In
+            </Button>
+          </Link>
 
-            <Link
-              href="/signup"
-              onClick={() => setOpen(false)}
-              className="w-full"
-            >
-              <Button
-                fullWidth
-                className="bg-linear-to-r from-pink-500 to-violet-600 text-white font-semibold"
-              >
-                Sign Up
-              </Button>
-            </Link>
-          </div>
+          <Link href="/signup">
+            <Button className="bg-linear-to-r from-pink-500 to-violet-600 text-white font-semibold shadow-lg shadow-pink-500/25 hover:scale-105 transition">
+              Sign Up
+            </Button>
+          </Link>
+        </div>
+          }
+          {
+            user && <div className="flex gap-3 items-center">
+                <Avatar>
+        <Avatar.Image alt="John Doe" src={user?.image} 
+        referrerPolicy="no-referrer"
+        />
+        <Avatar.Fallback>{userName[0]}</Avatar.Fallback>
+      </Avatar>
+
+          <Button onClick={handleSignOut} size="sm" variant="danger">Signout</Button>
+            </div>
+          }
         </div>
       </div>
     </header>
