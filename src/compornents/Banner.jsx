@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-    <section className="relative h-[75vh] w-full overflow-hidden ">
+    <section className="relative h-[75vh] w-full overflow-hidden rounded-2xl">
       {/* Background */}
       <div className="absolute inset-0">
         <Image

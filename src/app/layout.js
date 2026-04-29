@@ -7,29 +7,22 @@ const OutfitFont = Outfit({
   subsets: ["latin"],
 });
 
-
-
 export const metadata = {
   title: "Artiva",
   description: "Generate and explore stunning AI artworks with Artiva.",
   icons: {
-    icon: [
-      { url: "/logo.png", sizes: "32x32", type: "image/png" },
-    ],
+    icon: [{ url: "/logo.png", sizes: "32x32", type: "image/png" }],
   },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${OutfitFont.className}  h-full antialiased`}
-    >
-      <body >
-        <Navbar/>
-        {children}
-        <Footer/>
-        </body>
+    <html lang="en" data-theme="dark" className={`${OutfitFont.className}  h-full antialiased`}>
+      <body>
+        <Navbar />
+        <main className="max-w-7xl mx-auto">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

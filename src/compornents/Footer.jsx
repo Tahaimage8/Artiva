@@ -44,36 +44,40 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative mt-24 overflow-hidden border-t border-black/10 bg-white transition-colors duration-500 dark:border-white/10 dark:bg-[#0a0a0b]">
-      <div className="absolute inset-0 -z-10 bg-linear-to-tr from-purple-500/10 via-transparent to-pink-500/10 blur-3xl transition-opacity duration-500 dark:from-purple-500/15 dark:to-pink-500/15" />
+ <footer className="relative mt-24 overflow-hidden border-t border-white/10 bg-black">
+
+      {/* Glow FIX */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-500/10 via-transparent to-pink-500/10 blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+
+          {/* Brand */}
           <div className="space-y-5">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/logo.png" alt="logo" width={36} height={36} />
-              <h2 className="text-2xl font-black text-black transition-colors duration-500 dark:text-white">
+              <h2 className="text-2xl font-black text-white">
                 Artiva<span className="text-pink-500">.</span>
               </h2>
             </Link>
 
-            <p className="max-w-xs text-sm leading-relaxed text-gray-600 transition-colors duration-500 dark:text-gray-400">
+            <p className="text-sm text-gray-400 max-w-xs">
               Create, explore, and download stunning AI artworks.
             </p>
 
+            {/* Social */}
             <div className="flex gap-3">
               {socialLinks.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  target={item.name === "Email" ? undefined : "_blank"}
-                  rel={item.name === "Email" ? undefined : "noopener noreferrer"}
-                  aria-label={item.name}
-                  className={`group relative rounded-full border border-black/10 p-2 text-gray-600 shadow-lg shadow-transparent transition-all duration-300 hover:-translate-y-1 dark:border-white/10 dark:text-gray-300 ${item.hover}`}
+                  target={item.name !== "Email" ? "_blank" : undefined}
+                  className="group relative rounded-full border border-white/10 p-2 text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-black"
                 >
                   {item.icon}
 
-                  <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 scale-90 rounded-md bg-black px-2.5 py-1 text-xs text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 dark:bg-white dark:text-black">
+                  {/* Tooltip */}
+                  <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 scale-90 rounded-md bg-white px-2.5 py-1 text-xs text-black opacity-0 transition group-hover:opacity-100 group-hover:scale-100">
                     {item.name}
                   </span>
                 </Link>
@@ -81,60 +85,58 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Product */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-black dark:text-white">
-              Product
-            </h3>
-            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
-              <li><Link href="/generate" className="transition hover:text-pink-500">Generate</Link></li>
-              <li><Link href="/all-photos" className="transition hover:text-pink-500">Gallery</Link></li>
-              <li><Link href="/pricing" className="transition hover:text-pink-500">Pricing</Link></li>
+            <h3 className="mb-4 text-sm font-semibold text-white">Product</h3>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li><Link href="/generate" className="hover:text-pink-500">Generate</Link></li>
+              <li><Link href="/all-photos" className="hover:text-pink-500">Gallery</Link></li>
+              <li><Link href="/pricing" className="hover:text-pink-500">Pricing</Link></li>
             </ul>
           </div>
 
+          {/* Company */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-black dark:text-white">
-              Company
-            </h3>
-            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
-              <li><Link href="/about" className="transition hover:text-pink-500">About</Link></li>
-              <li><Link href="/contact" className="transition hover:text-pink-500">Contact</Link></li>
-              <li><Link href="/terms" className="transition hover:text-pink-500">Terms</Link></li>
+            <h3 className="mb-4 text-sm font-semibold text-white">Company</h3>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li><Link href="/about" className="hover:text-pink-500">About</Link></li>
+              <li><Link href="/contact" className="hover:text-pink-500">Contact</Link></li>
+              <li><Link href="/terms" className="hover:text-pink-500">Terms</Link></li>
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-black/10 bg-black/5 p-5 transition-colors duration-500 dark:border-white/10 dark:bg-white/5">
-            <h3 className="text-sm font-semibold text-black dark:text-white">
+          {/* CTA FIX */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+            <h3 className="text-sm font-semibold text-white">
               Start creating today
             </h3>
 
-            <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-3 text-sm text-gray-400">
               Generate your first AI image now.
             </p>
 
             <Link
               href="/signup"
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-linear-to-r from-pink-500 via-purple-500 to-violet-600 px-5 py-2.5 font-semibold text-white shadow-lg shadow-pink-500/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-pink-500/40"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-violet-600 px-5 py-2.5 text-white font-semibold shadow-lg transition hover:scale-[1.03]"
             >
               Get Started ↗
             </Link>
           </div>
+
         </div>
 
-        <div className="mt-12 border-t border-black/10 pt-6 transition-colors duration-500 dark:border-white/10">
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-gray-500 dark:text-gray-400 md:flex-row">
+        {/* Bottom */}
+        <div className="mt-12 border-t border-white/10 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
             <p>© {new Date().getFullYear()} Artiva. All rights reserved.</p>
 
             <div className="flex gap-6">
-              <Link href="/privacy" className="transition hover:text-pink-500">
-                Privacy
-              </Link>
-              <Link href="/terms" className="transition hover:text-pink-500">
-                Terms
-              </Link>
+              <Link href="/privacy" className="hover:text-pink-500">Privacy</Link>
+              <Link href="/terms" className="hover:text-pink-500">Terms</Link>
             </div>
           </div>
         </div>
+
       </div>
     </footer>
   );
