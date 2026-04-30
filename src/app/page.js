@@ -1,5 +1,5 @@
-import Banner from "@/compornents/Banner";
-import FeaturedAICreations from "@/compornents/FeaturedAICreations";
+import Banner from "@/components/Banner";
+import FeaturedAICreations from "@/components/FeaturedAICreations";
 import Image from "next/image";
 
 export default function Home() {

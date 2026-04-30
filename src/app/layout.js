@@ -1,7 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/compornents/Navbar";
-import Footer from "@/compornents/Footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 
 const OutfitFont = Outfit({

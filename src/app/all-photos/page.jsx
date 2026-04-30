@@ -1,5 +1,5 @@
-import Category from "@/compornents/Category";
-import PhotoCard from "@/compornents/PhotoCard";
+import Category from "@/components/Category";
+import PhotoCard from "@/components/PhotoCard";
 import React from "react";
 
 const AllPhotosPage = async ({ searchParams }) => {
